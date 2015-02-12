@@ -1,0 +1,4 @@
+forge "https://forgeapi.puppetlabs.com"
+
+mod 'stankevich/python'
+mod 'puppetlabs/stdlib'
