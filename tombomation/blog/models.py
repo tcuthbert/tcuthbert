@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from markdown import markdown
 
@@ -59,7 +60,7 @@ class Post(models.Model):
     date_publish = models.DateTimeField(
         verbose_name = (u'Publish Date'),
         help_text = (u' '),
-        auto_now=True
+        default=datetime.datetime.now
     )
 
     class Meta:

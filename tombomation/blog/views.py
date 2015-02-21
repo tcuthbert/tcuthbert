@@ -8,8 +8,10 @@ import calendar, datetime
 class IndexView(TemplateView):
     template_name = "blog/post/index.html"
 
-    #def __init__(self, *args, **kwargs):
-        #super(IndexView, self).init(*args, **kwargs)
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['posts'] = Post.objects.all()
+        return context
 
     def index(self):
         """Blog Index

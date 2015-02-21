@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %} Stuff I say {% endblock %}</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -27,7 +27,6 @@
                 <div class="masthead">
                     <ul class="nav nav-pills pull-right">
                         <li{% if "/" == request.get_full_path %} class="active"{% endif %}><a href="/">Home</a></li>
-                        <li{% if "/blog/" == request.get_full_path %} class="active"{% endif %}><a href="{% url blog-post-index %}">Blog</a></li>
                     </ul>
                     <h3 class="muted">Tombomation</h3>
                 </div>

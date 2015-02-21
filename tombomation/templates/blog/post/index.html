@@ -1,5 +1,4 @@
 {% extends "blog/base.html" %}
-{% load comments %}
 
 {% block title %}Blog | {{ block.super }}{% endblock%}
 
@@ -16,12 +15,9 @@
         <h3>Blog Index</h3>
         {% for item in posts %}
         <article class="news-item">
-            <h4 class="title"><a href="{% url blog-article-single slug=item.slug %}">{{ item.title }}</a></h4>
             <div class="meta">{{ item.date_publish|date:"F j, Y" }}</div>
             <div class="text">
                 <p>{{ item.excerpt|safe }}</p>
-                {% get_comment_count for item as comment_count %}
-                <p>{{ comment_count }} comments</p>
             </div>
         </article>
         {% endfor %}
@@ -49,11 +45,9 @@
         {% if archive_dates|length > 0%}
             <li class="nav-header">Archive Dates</li>
             {% for date in archive_dates %}
-            <li><a href="{% url blog-date-archive month=date|date:"m" year=date|date:"Y" %}">{{ date|date:"M Y" }}</a></li>
             {% endfor %}
             <li class="nav-header">Categories</li>
             {% for tmp in categories %}
-            <li{% if category.slug == tmp.slug %} class="active"{% endif %}><a href="{% url blog-category-archive slug=tmp.slug %}">{{ tmp.title }}</a></li>
             {% endfor %}
         {% endif %}
         </ul>

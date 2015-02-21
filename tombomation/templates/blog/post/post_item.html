@@ -1,12 +1,10 @@
 {% extends "base.html" %}
-{% load comments %}
 
 {% block title %}{{ post.title }} | Blog | {{ block.super }}{% endblock%}
 
 {% block breadcrumb %}
 <ul class="breadcrumb">
   <li><a href="/">Home</a> <span class="divider">/</span></li>
-  <li><a href="{% url blog-article-index %}">Blog</a> <span class="divider">/</span></li>
   <li class="active">{{ post.title }}</li>
 </ul>
 {% endblock %}
@@ -17,64 +15,17 @@
         <h3>{{ post.title }}</h3>
         <p class="meta">{{ post.date_publish|date:"F j, Y" }}</p>
         {{ post.content_markup|safe }}
-        <p class="meta">{% for category in post.categories.all %}<a class="btn" href="{% url blog-category-archive slug=category.slug %}">{{ category.title }}</a> {% endfor %}</p>
         {% if request.user.is_staff %}[ <a class="edit-link" href="{{ post.get_admin_url }}">Edit</a> ]{% endif %}
         <hr />
 
-        <div id="wrap_comments">
-
-            {% get_comment_list for article as comment_list %}
-            {% if comment_list.count > 0 %}
-            <h3>Discussion</h3>
-            {% for comment in comment_list %}
-                <blockquote>
-                    <a name="c{{ comment.id }}"></a>
-                    <p><a href="{% get_comment_permalink comment %}">#{{ forloop.counter }}</a> - {{ comment.comment }}</p>
-                    <small>{% if comment.url %}<a href="{{ comment.url }}" target="_blank"><i class="icon-user"></i>{{ comment.name }}</a>{% else %}<i class="icon-user"></i>{{ comment.name }}{% endif %} on <cite title="#{{ forloop.counter }}">{{ comment.submit_date|date }}</cite></small>
-                </blockquote>
-            {% endfor %}
-            {% endif %}
-
-            <h3>Leave a Comment</h3>
-            <p>Fill out the form below to start a discussion.</p>
-            {% get_comment_form for article as form %}
-            <form action="{% comment_form_target %}" method="post">{% csrf_token %}
-                <div class="row-fluid">
-                    <div class="span4 pull">
-                        {{ form.non_field_errors }}
-
-                        {{ form.content_type.as_hidden }}
-                        {{ form.object_pk.as_hidden }}
-                        {{ form.timestamp.as_hidden }}
-                        {{ form.security_hash.as_hidden }}
-
-                        {{ form.honeypot }}
-                        {{ form.name.label_tag }}{{ form.name }}{{ form.name.errors }}
-                        {{ form.email.label_tag }}{{ form.email }}{{ form.email.errors }}
-                        {{ form.url.label_tag }}{{ form.url }}{{ form.url.errors }}
-                    </div>
-                    <div class="span8 push">
-                        {{ form.comment.label_tag }}{{ form.comment }}{{ form.comment.errors }}
-                    </div>
-                </div>
-                <div class="form-actions">
-                    <input type="hidden" name="next" value="{{ request.path }}" />
-                    <input type="submit" name="submit" value="Post" class="btn btn-primary" />
-                    <input type="submit" name="preview" value="Preview" class="btn" />
-                </div>                
-            </form>
-        </div>
-    </div>
     <div class="span3">
         <ul class="nav nav-list">
         {% if archive_dates|length > 0%}
             <li class="nav-header">Archive Dates</li>
             {% for date in archive_dates %}
-            <li><a href="{% url blog-date-archive month=date|date:"m" year=date|date:"Y" %}">{{ date|date:"M Y" }}</a></li>
             {% endfor %}
             <li class="nav-header">Categories</li>
             {% for tmp in categories %}
-            <li{% if category.slug == tmp.slug %} class="active"{% endif %}><a href="{% url blog-category-archive slug=tmp.slug %}">{{ tmp.title }}</a></li>
             {% endfor %}
         {% endif %}
         </ul>
