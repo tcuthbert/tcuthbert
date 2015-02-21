@@ -8,13 +8,8 @@ import calendar, datetime
 class IndexView(TemplateView):
     template_name = "blog/post/index.html"
 
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['posts'] = Post.objects.all()
-        return context
-
-    def index(self):
-        """Blog Index
+    def feed(self):
+        """Blog feed
 
         :param request: TODO
         :type request: django.http.request.HttpRequest
@@ -22,7 +17,7 @@ class IndexView(TemplateView):
 
         """
 
-        archive_dates = Post.objects.dates('date_publish', 'month', order='DESC')
+        #archive_dates = Post.objects.dates('date_publish', 'month', order='DESC')
         categories = Category.objects.all()
 
         page = self.get('page')
@@ -36,15 +31,16 @@ class IndexView(TemplateView):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
 
-        return render (
-            self.render_to_response(self.template_name),
-            self.template_name,
-            {
-                "posts": posts,
-                "archive_dates": archive_dates,
-                "categories": categories
-            }
-        )
+        return posts
+        #return render (
+            #self.render_to_response(self.template_name),
+            #self.template_name,
+            #{
+                #"posts": posts,
+                #"archive_dates": archive_dates,
+                #"categories": categories
+            #}
+        #)
 
 class PostItemView(TemplateView):
     template_name = "blog/post/post_item.html"
@@ -68,7 +64,7 @@ class PostItemView(TemplateView):
             self.render_to_response(self.template_name),
             self.template_name,
             {
-                "posts": posts,
+                "posts": post,
                 "archive_dates": archive_dates,
                 "categories": categories
             }

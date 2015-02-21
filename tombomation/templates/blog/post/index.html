@@ -13,11 +13,11 @@
 <div class="row-fluid">
     <div class="span9">
         <h3>Blog Index</h3>
-        {% for item in posts %}
+        {% for item in view.feed %}
         <article class="news-item">
             <div class="meta">{{ item.date_publish|date:"F j, Y" }}</div>
             <div class="text">
-                <p>{{ item.excerpt|safe }}</p>
+                <p>{{ item.content_markup|safe }}</p>
             </div>
         </article>
         {% endfor %}
