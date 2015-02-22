@@ -60,7 +60,7 @@ class Post(models.Model):
     date_publish = models.DateTimeField(
         verbose_name = (u'Publish Date'),
         help_text = (u' '),
-        default=datetime.datetime.now
+        default=datetime.datetime.now()
     )
 
     class Meta:
