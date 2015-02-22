@@ -25,7 +25,7 @@ class Category(models.Model):
         verbose_name_plural = (u"Categories")
         ordering = ['title',]
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s" % (self.title, )
 
 
@@ -73,5 +73,5 @@ class Post(models.Model):
         self.content_markup = markdown(self.content_markdown, ['codehilite'])
         super(Post, self).save(*args, **kwargs)
 
-    def __unicode__(self):
+    def __str__(self):
         return "%s" % (self.title,)
