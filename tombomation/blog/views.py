@@ -1,23 +1,23 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ArchiveIndexView, DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from blog.models import Category, Post
 import calendar, datetime
 
 
-class IndexView(TemplateView):
+class BlogView(TemplateView):
     template_name = "blog/post/index.html"
-    feed_items = {}
+    blog_items = {}
 
     def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        self.feed()
-        context["posts"] = self.feed_items["posts"]
-        context["archive_dates"] = self.feed_items["archive_dates"]
-        context["categories"] = self.feed_items["categories"]
+        context = super(BlogView, self).get_context_data(**kwargs)
+        self.blog_context_items()
+        context["posts"] = self.blog_items["posts"]
+        context["archive_dates"] = self.blog_items["archive_dates"]
+        context["categories"] = self.blog_items["categories"]
         return context
 
-    def feed(self):
+    def blog_context_items(self):
         """Blog feed
 
         :param request: TODO
@@ -40,64 +40,26 @@ class IndexView(TemplateView):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
 
-        self.feed_items = {
+        self.blog_items = {
                 "posts": posts,
                 "archive_dates": archive_dates,
                 "categories": categories
             }
-        #return render (
-            #self.render_to_response(self.template_name),
-            #self.template_name,
-            #{
-                #"posts": posts,
-                #"archive_dates": archive_dates,
-                #"categories": categories
-            #}
-        #)
 
-class PostItemView(TemplateView):
+class PostItemView(DetailView):
     template_name = "blog/post/post_item.html"
+    model = Post
+    context_object_name = "post"
 
-    #def __init__(self, *args, **kwargs):
-        #super(PostItemView, self).__init__()
+    def get_context_data(self, *args, **kwargs):
+        context = super(PostItemView, self).get_context_data(**kwargs)
+        post = self.model
+        context["archive_dates"] = Post.objects.datetimes('date_publish', 'month', order='DESC')
+        context["categories"] = post.categories.through.objects.all()
+        return context
 
-    def post_item(self, slug):
-        """Render single post
+class DateArchiveBlogView(ArchiveIndexView):
+    template_name = "blog/post/date_archive.html"
 
-        :param request: TODO
-        :param slug: TODO
-        :returns: TODO
-
-        """
-        
-        post = get_object_or_404(Post, slug=slug)
-        archive_dates = Post.objects.dates('date_publish', 'month', order="DESC")
-        categories = Category.objects.all()
-        return (
-            self.render_to_response(self.template_name),
-            self.template_name,
-            {
-                "posts": post,
-                "archive_dates": archive_dates,
-                "categories": categories
-            }
-        )
-
-def date_archive(request, slug):
-    """TODO: Docstring for date_archive.
-
-    :param arg1: TODO
-    :returns: TODO
-
-    """
-    pass
-    
-def category_archive(request, slug):
-    """TODO: Docstring for category_archive.
-
-    :param request: TODO
-    :param slug: TODO
-    :returns: TODO
-
-    """
-    pass
+class CategoryBlogView(ArchiveIndexView):
+    template_name = "blog/post/category_archive.html"

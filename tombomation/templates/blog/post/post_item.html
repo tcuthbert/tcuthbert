@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "blog/base.html" %}
 
 {% block title %}{{ post.title }} | Blog | {{ block.super }}{% endblock%}
 
@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid">
+<div id="content" class="row-fluid">
     <div class="span9">
         <h3>{{ post.title }}</h3>
         <p class="meta">{{ post.date_publish|date:"F j, Y" }}</p>
@@ -23,9 +23,11 @@
         {% if archive_dates|length > 0%}
             <li class="nav-header">Archive Dates</li>
             {% for date in archive_dates %}
+            <li><a href="{% url "blog-date-archive" month=date|date:"m" year=date|date:"Y" %}">{{ date|date:"M Y"  }}</a></li>
             {% endfor %}
             <li class="nav-header">Categories</li>
-            {% for tmp in categories %}
+            {% for cat in categories %}
+            <li{% if category.slug == cat.slug %} class="active"{% endif %}><a href="{% url "blog-category-archive" slug=cat.slug %}">{{ cat.title  }}</a></li>
             {% endfor %}
         {% endif %}
         </ul>

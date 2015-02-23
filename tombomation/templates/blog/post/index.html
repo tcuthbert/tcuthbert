@@ -10,11 +10,12 @@
 {% endblock %}
 
 {% block content %}
-<div class="row-fluid">
+<div id="content" class="row-fluid">
     <div class="span9">
         <h3>Blog Index</h3>
         {% for item in posts %}
         <article class="news-item">
+          <h4 class="title"><a href="{% url "blog-post-item" slug=item.slug %}">{{ item.title }}</a></h4>
             <div class="meta">{{ item.date_publish|date:"F j, Y" }}</div>
             <div class="text">
                 <p>{{ item.content_markup|safe }}</p>
