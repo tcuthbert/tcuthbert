@@ -49,7 +49,8 @@
             <li><a href="{% url "blog-date-archive" month=date|date:"m" year=date|date:"Y" %}">{{ date|date:"M Y"  }}</a></li>
             {% endfor %}
             <li class="nav-header">Categories</li>
-            {% for tmp in categories %}
+            {% for cat in categories %}
+            <li{% if category.slug == cat.slug %} class="active"{% endif %}><a href="{% url "blog-category-archive" slug=cat.slug %}">{{ cat.title }}</a></li>
             {% endfor %}
         {% endif %}
         </ul>
