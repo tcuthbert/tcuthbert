@@ -18,13 +18,13 @@
           <h4 class="title"><a href="{% url "blog-post-item" slug=item.slug %}">{{ item.title }}</a></h4>
             <div class="meta">{{ item.date_publish|date:"F j, Y" }}</div>
             <div class="text">
-                <p>{{ item.content_markup|safe }}</p>
+                <p>{{ item.content_markup|truncatewords:10|safe }}</p>
             </div>
         </article>
         {% endfor %}
 
         <div class="pagination pagination-small pagination-centered">
-            <ul>
+            <ult>
                 {% if posts.has_previous %}
                 <li><a href="?page={{ posts.previous_page_number }}">previous</a></li>
                 {% else %}
