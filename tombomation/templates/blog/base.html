@@ -26,11 +26,13 @@
             <!-- Begin page content -->
             <div class="container">
                 <div id="header" >
-                    <ul class="nav nav-pills pull-right">
-                        <li{% if "/" == request.get_full_path %} class="active"{% endif %}><a href="/">Home</a></li>
-                        <li{% if "/blog" == request.get_full_path %} class="active"{% endif %}><a href="/blog">Blog</a></li>
-                    </ul>
-                    <h3>Tombomation</h3>
+                  {% if user.is_staff %}
+                  <ul class="nav nav-pills pull-right">
+                      <li{% if "/" == request.get_full_path %} class="active"{% endif %}><a href="/">Home</a></li>
+                      <li{% if "/blog" == request.get_full_path %} class="active"{% endif %}><a href="/blog">Blog</a></li>
+                  </ul>
+                  {% endif %}
+                  <h3>Tombomation</h3>
                 </div>
                 {% block breadcrumb %}{% endblock %}
                 {% block content %}{% endblock%}
