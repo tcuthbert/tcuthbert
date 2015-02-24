@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, include, url
-from blog.views import BlogView, PostItemView, DateArchiveBlogView, CategoryBlogView
+from blog.views import BlogView, PostItemView, DateArchiveBlogView, CategoryListView
 
 urlpatterns = patterns('',
-    url('^blog/archive/(?P<year>[\d]+)/(?P<month>[\d]+)/$', DateArchiveBlogView.as_view(), name="blog-date-archive"),
-    url('^blog/archive/(?P<slug>[-\w]+)/$', CategoryBlogView.as_view(), name="blog-category-archive"),
-    url('^blog/(?P<slug>[-\w]+)/$', PostItemView.as_view(), name="blog-post-item"),
-    url('(^$|^blog/$)', BlogView.as_view(), name="blog-post-index")
+    url('archive/(?P<year>[\d]+)/(?P<month>[\d]+)/$', DateArchiveBlogView.as_view(date_field="date_publish"), name="blog-date-archive"),
+    url('archive/(?P<slug>[-\w]+)/$', CategoryListView.as_view(), name="blog-category-archive"),
+    url('(?P<slug>[-\w]+)/$', PostItemView.as_view(), name="blog-post-item"),
+    url('^$', BlogView.as_view(), name="blog-post-index"),
 )

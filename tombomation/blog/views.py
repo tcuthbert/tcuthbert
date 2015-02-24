@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, ArchiveIndexView, DetailView
+from django.views.generic import TemplateView, ArchiveIndexView, DetailView, ListView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 from blog.models import Category, Post
@@ -53,13 +53,16 @@ class PostItemView(DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(PostItemView, self).get_context_data(**kwargs)
-        post = self.model
+        post = self.get_object()
         context["archive_dates"] = Post.objects.datetimes('date_publish', 'month', order='DESC')
-        context["categories"] = post.categories.through.objects.all()
+        context["categories"] = Category.objects.filter(post__id=post.id)
         return context
 
 class DateArchiveBlogView(ArchiveIndexView):
     template_name = "blog/post/date_archive.html"
+    model = Post
 
-class CategoryBlogView(ArchiveIndexView):
+class CategoryListView(ListView):
     template_name = "blog/post/category_archive.html"
+    model = Category
+    context_object_name = "categories"
