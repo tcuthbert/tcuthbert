@@ -43,9 +43,10 @@
     </div>
     <div class="span3">
         <ul class="nav nav-list">
-        {% if archive_dates|length > 0%}
+        {% if archive_dates|length > 0 %}
             <li class="nav-header">Archive Dates</li>
             {% for date in archive_dates %}
+            <li><a href="{% url "blog-date-archive" month=date|date:"m" year=date|date:"Y" %}">{{ date|date:"M Y"  }}</a></li>
             {% endfor %}
             <li class="nav-header">Categories</li>
             {% for tmp in categories %}
