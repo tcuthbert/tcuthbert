@@ -3,16 +3,17 @@
 {% block title %}Blog | {{ block.super }}{% endblock%}
 
 {% block breadcrumb %}
-<ul class="breadcrumb">
+<ul class="breadcrumb row">
   <li><a href="/">Home</a> <span class="divider">/</span></li>
   <li class="active">Blog</li>
 </ul>
 {% endblock %}
 
 {% block content %}
-<div id="content" class="row-fluid">
-    <div class="span9">
-        <h3>Blog Index</h3>
+<div id="content" class="row">
+    <!--<div class="span9">-->
+    <div class="col-md-8 col-md-offset-1">
+      <h1>New Posts</h1>
         {% for item in posts %}
         <article class="news-item">
           <h4 class="title"><a href="{% url "blog-post-item" slug=item.slug %}">{{ item.title }}</a></h4>
@@ -41,7 +42,8 @@
             </span>
         </div>
     </div>
-    <div class="span3">
+    <!--<div class="span6">-->
+    <div class="col-md-2 pull-right">
         <ul class="nav nav-list">
         {% if archive_dates|length > 0 %}
             <li class="nav-header">Archive Dates</li>

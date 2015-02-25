@@ -3,23 +3,26 @@
 {% block title %}{{ post.title }} | Blog | {{ block.super }}{% endblock%}
 
 {% block breadcrumb %}
-<ul class="breadcrumb">
+<ul class="breadcrumb row">
   <li><a href="/">Home</a> <span class="divider">/</span></li>
   <li class="active">{{ post.title }}</li>
 </ul>
 {% endblock %}
 
 {% block content %}
-<div id="content" class="row-fluid">
-    <div class="span9">
+<div id="content" class="row">
+    <!--<div class="col-md-8 col-md-offset-1">-->
+    <div class="row-fluid">
+      <div class="col-md-offset-1">
         <h3>{{ post.title }}</h3>
         <p class="meta">{{ post.date_publish|date:"F j, Y" }}</p>
         {{ post.content_markup|safe }}
         {% if request.user.is_staff %}[ <a class="edit-link" href="{{ post.get_admin_url }}">Edit</a> ]{% endif %}
+      </div>
         <hr />
 
-    <div class="span3">
-        <ul class="nav nav-list">
+    <div class="row">
+      <ul class="nav nav-list col-md-2 col-md-offset-1">
         {% if archive_dates|length > 0%}
             <li class="nav-header">Archive Dates</li>
             {% for date in archive_dates %}
