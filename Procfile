@@ -1,1 +1,3 @@
-web: python manage.py runserver
+web: python manager.py migrate \
+python manage.py syncdb \
+python manage.py runserver
