@@ -6,3 +6,4 @@ django-pagedown==0.1.0
 logilab-common==0.63.2
 six==1.9.0
 pytz==2014.10
+django-toolbelt==0.0.1
