@@ -38,7 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'autofixture',
     'pagedown',
     'blog',
 )
@@ -90,9 +89,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_ROOT = os.getenv('HOME') + '/.local/var/www/html/static/'
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ( os.path.join('static'), )
 
 # Session Storage
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+
+# Local Settings
+try:
+    from .local_settings import *
+except:
+    pass

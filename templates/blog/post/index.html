@@ -19,7 +19,7 @@
           <h4 class="title"><a href="{% url "blog-post-item" slug=item.slug %}">{{ item.title }}</a></h4>
             <div class="meta">{{ item.date_publish|date:"F j, Y" }}</div>
             <div class="text">
-                <p>{{ item.content_markup|truncatewords:10|safe }}</p>
+                <p>{{ item.content_markup|striptags|truncatewords:10|safe }}</p>
             </div>
         </article>
         {% endfor %}
@@ -48,7 +48,7 @@
         {% if archive_dates|length > 0 %}
             <li class="nav-header">Archive Dates</li>
             {% for date in archive_dates %}
-            <li><a href="{% url "blog-date-archive" month=date|date:"m" year=date|date:"Y" %}">{{ date|date:"M Y"  }}</a></li>
+            <li><a href="{% url "blog-date-archive" month=date|date:"M" year=date|date:"Y" %}">{{ date|date:"M Y"  }}</a></li>
             {% endfor %}
             <li class="nav-header">Categories</li>
             {% for cat in categories %}
@@ -59,4 +59,3 @@
     </div>
 </div>
 {% endblock %}
-

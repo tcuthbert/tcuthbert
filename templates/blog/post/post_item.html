@@ -12,29 +12,31 @@
 {% block content %}
 <div id="content" class="row">
     <!--<div class="col-md-8 col-md-offset-1">-->
-    <div class="row-fluid">
-      <div class="col-md-offset-1">
+    <!--<div class="row-fluid">-->
+      <!--<div class="center-block col-md-9" style="float: none;">-->
+      <!--<div class="center-block col-md-9" >-->
+    <div class="col-md-8 col-md-offset-1">
         <h3>{{ post.title }}</h3>
         <p class="meta">{{ post.date_publish|date:"F j, Y" }}</p>
-        {{ post.content_markup|safe }}
+        <div style="display: inline-block;">
+            {{ post.content_markup|safe }}
+        </div>
         {% if request.user.is_staff %}[ <a class="edit-link" href="{{ post.get_admin_url }}">Edit</a> ]{% endif %}
       </div>
-        <hr />
 
-    <div class="row">
-      <ul class="nav nav-list col-md-2 col-md-offset-1">
-        {% if archive_dates|length > 0%}
+    <div class="col-md-2 pull-right">
+        <ul class="nav nav-list">
+        {% if archive_dates|length > 0 %}
             <li class="nav-header">Archive Dates</li>
             {% for date in archive_dates %}
-            <li><a href="{% url "blog-date-archive" month=date|date:"m" year=date|date:"Y" %}">{{ date|date:"M Y"  }}</a></li>
+            <li><a href="{% url "blog-date-archive" month=date|date:"M" year=date|date:"Y" %}">{{ date|date:"M Y"  }}</a></li>
             {% endfor %}
             <li class="nav-header">Categories</li>
             {% for cat in categories %}
-            <li{% if category.slug == cat.slug %} class="active"{% endif %}><a href="{% url "blog-category-archive" slug=cat.slug %}">{{ cat.title  }}</a></li>
+            <li{% if category.slug == cat.slug %} class="active"{% endif %}><a href="{% url "blog-category-archive" slug=cat.slug %}">{{ cat.title }}</a></li>
             {% endfor %}
         {% endif %}
         </ul>
     </div>
 </div>
 {% endblock %}
-
