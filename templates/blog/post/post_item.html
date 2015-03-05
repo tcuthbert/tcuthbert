@@ -10,11 +10,11 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" class="row">
     <!--<div class="col-md-8 col-md-offset-1">-->
     <!--<div class="row-fluid">-->
       <!--<div class="center-block col-md-9" style="float: none;">-->
       <!--<div class="center-block col-md-9" >-->
+  <div id="content" class="row">
     <div class="col-md-8 col-md-offset-1">
         <h3>{{ post.title }}</h3>
         <p class="meta">{{ post.date_publish|date:"F j, Y" }}</p>
@@ -38,5 +38,5 @@
         {% endif %}
         </ul>
     </div>
-</div>
+  </div>
 {% endblock %}

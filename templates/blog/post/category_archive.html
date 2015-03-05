@@ -8,8 +8,8 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" class="row">
     <!--<div class="span9">-->
+  <div id="content" class="row">
     <div class="col-md-8 col-md-offset-1">
       <h2>Category: {{ category.title|title }}</h2>
         {% for item in posts %}
@@ -54,5 +54,5 @@
         {% endif %}
         </ul>
     </div>
-
+  </div>
 {% endblock %}

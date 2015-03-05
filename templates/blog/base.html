@@ -36,8 +36,12 @@
                   <h3>Tombomation</h3>
                 </div>
                 {% block breadcrumb %}{% endblock %}
-                {% block content %}{% endblock%}
-                {% block footer %}{% endblock %}
+                <div class="row-fluid">
+                {% block content %}{% endblock %}
+                  <footer>
+                      <small>(c) 2015 Thomas Cuthbert - Powered By Django</small>
+                  </footer>
+                </div>
             </div>
         </div>
 

@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-<div id="content" class="row">
+  <div id="content" class="row">
     <div class="col-md-8 col-md-offset-1">
         <h2>Blog Archive: {{ month|date:"M Y" }} <!--to {{ end|date:"d M Y" }}--></h2>
         {% for post in posts %}
@@ -55,5 +55,5 @@
         {% endif %}
         </ul>
     </div>
-</div>
+  </div>
 {% endblock %}
