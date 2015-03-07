@@ -1,0 +1,24 @@
+/* universal options */
+/** {*/
+  /*box-sizing: border-box;*/
+/*}*/
+
+/* typography */
+
+/* layout */
+body {
+  background-color: #000000;
+}
+
+#content {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+#header {
+  color: #ffffff;
+}
+
+#header h3 {
+  font-weight: bolder;
+}
