@@ -8,7 +8,8 @@
 /* layout */
 body {
   background-color: #000000;
-  font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif; 
+  /*font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif; */
+  font-family: Tahoma, Geneva, sans-serif;
 }
 
 #content {

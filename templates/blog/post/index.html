@@ -13,7 +13,7 @@
     <!--<div class="span9">-->
   <div id="content" class="row">
     <div class="col-md-8 col-md-offset-1">
-      <h1>New Posts</h1>
+      <h2>New Posts</h2>
         {% for item in posts %}
         <article class="news-item">
           <h4 class="title"><a href="{% url "blog-post-item" slug=item.slug %}">{{ item.title }}</a></h4>
