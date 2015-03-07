@@ -18,6 +18,7 @@
     <div class="col-md-8 col-md-offset-1">
         <h3>{{ post.title }}</h3>
         <p class="meta">{{ post.date_publish|date:"F j, Y" }}</p>
+        <small>posted by {{ post.user }}</small>
         <div style="display: inline-block;">
             {{ post.content_markup|safe }}
         </div>

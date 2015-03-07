@@ -18,6 +18,7 @@
         <article class="news-item">
             <h4 class="title"><a href="{% url "blog-post-item" slug=post.slug %}">{{ post.title }}</a></h4>
             <div class="meta">{{ post.date_publish|date:"F j, Y" }}</div>
+            <small>posted by {{ post.user }}</small>
             <div class="text">
                 <p>{{ post.content_markup|striptags|truncatewords:10|safe }}</p>
             </div>
