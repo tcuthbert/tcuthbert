@@ -38,6 +38,9 @@ class PostAdmin(admin.ModelAdmin):
             }
         ),
     )
+    def save_model(self, request, obj, form, change):
+        obj.user = request.user
+        obj.save()
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Post, PostAdmin)

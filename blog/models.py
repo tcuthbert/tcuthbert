@@ -1,5 +1,6 @@
 import datetime
 from django.db import models
+from django.contrib.auth.models import User
 from markdown import markdown
 
 # Create your models here.
@@ -36,6 +37,7 @@ class Post(models.Model):
         help_text = (u' '),
         max_length = 255
     )
+    user = models.ForeignKey(User, editable=False)
     slug = models.SlugField(
         verbose_name = (u'Slug'),
         help_text = (u'Uri identifier.'),
