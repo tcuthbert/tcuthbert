@@ -21,6 +21,10 @@ body {
   color: #ffffff;
 }
 
+#sidebar ul {
+  display: inline-block;
+}
+
 #header h3 {
   font-weight: bolder;
 }
